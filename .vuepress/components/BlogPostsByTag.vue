@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { compact, uniq, flatMap } from "lodash"
 import RenderlessPagesList from "./RenderlessPagesList"
 import blogPageListProps from "./blogPageListProps.js"
 
