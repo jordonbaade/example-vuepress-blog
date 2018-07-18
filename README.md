@@ -1,9 +1,12 @@
+---
+home: true
+---
+
 # Instructions
 
-1. Clone this repo to your machine
-2. [Install VuePress](https://vuepress.vuejs.org/guide/getting-started.html#global-installation)
-3. `cd` into your project folder
-4. Run `vuepress dev` or `vuepress build`
+1.  Clone this repo to your machine
+3.  `cd` into the cloned folder
+4.  Run `vuepress dev` and visit the provided localhost link or run `vuepress build` to build production files
 
 # License
 
