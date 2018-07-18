@@ -17,14 +17,12 @@
 </template>
 
 <script>
-import { toDate, format, formatRelative } from "date-fns"
+import { format, toDate } from "date-fns"
 export default {
   methods: {
     toDate,
-    format,
-    formatRelative,
     formatDate(date) {
-      return formatRelative(toDate(date), new Date())
+      return format(toDate(date), 'Pp')
     },
     formatAnchor(string) {
       return string.toLowerCase().replace(/ /g, "-")

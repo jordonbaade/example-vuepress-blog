@@ -9,16 +9,9 @@ import {
   some,
   includes
 } from "lodash"
-import { formatRelative, toDate } from "date-fns"
+import { format, toDate } from "date-fns"
 export default {
   props: {
-    allPages: {
-      default() {
-        return []
-      },
-      type: [Array],
-      required: true
-    },
     byTags: {
       default() {
         return []
@@ -56,17 +49,22 @@ export default {
       type: [Array, String]
     }
   },
+  computed: {
+    filteredPages() {
+      this.filterPages()
+      return this.pages
+    }
+  },
   data() {
     return {
       pages: []
     }
   },
   mounted() {
-    this.filterPages()
   },
   methods: {
     filterPages() {
-      this.resetPages()
+      this.setPages()
       this.filterOutByPaths()
       this.filterByPaths()
       this.filterByCategories()
@@ -92,8 +90,8 @@ export default {
     filterOutByPaths() {
       this.filterIsNot("notPaths", "path")
     },
-    resetPages() {
-      this.pages = this.allPages
+    setPages() {
+      this.pages = this.$site.pages
     },
     filterIncludes(byWhat, byKey, exclude = false) {
       if (!get(this, byWhat).length) return
@@ -149,12 +147,12 @@ export default {
       return string.toLowerCase().replace(/ /g, "-")
     },
     formatDate(date) {
-      return formatRelative(toDate(date), new Date())
+      return format(toDate(date), 'P')
     }
   },
   render() {
     return this.$scopedSlots.default({
-      pages: this.pages,
+      pages: this.filteredPages,
       tags: this.tags,
       categories: this.categories,
       formatDate: this.formatDate,
