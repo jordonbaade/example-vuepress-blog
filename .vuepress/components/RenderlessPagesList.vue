@@ -7,7 +7,8 @@ import {
   get,
   filter,
   some,
-  includes
+  includes,
+  sortBy
 } from "lodash"
 import { format, toDate } from "date-fns"
 export default {
@@ -71,6 +72,7 @@ export default {
       this.filterByTags()
       this.filterOutByCategories()
       this.filterOutByTags()
+      this.sortByMostRecent()
     },
     filterByTags() {
       this.filterIncludes("byTags", "frontmatter.tags")
@@ -136,6 +138,9 @@ export default {
         each(pageKeyValues, value => yesNos.push(get(page, byKey) === value))
         return !some(yesNos)
       })
+    },
+    sortByMostRecent() {
+      this.pages = sortBy(this.pages, "frontmatter.date").reverse()
     },
     categories() {
       return compact(uniq(flatMap(this.pages, "frontmatter.categories"))).sort()
