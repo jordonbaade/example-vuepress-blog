@@ -140,7 +140,7 @@ export default {
       })
     },
     sortByMostRecent() {
-      this.pages = sortBy(this.pages, "frontmatter.date").reverse()
+      this.pages = sortBy(this.pages, [(page) => { return format(toDate(page.frontmatter.date), 'S'); }]).reverse()
     },
     categories() {
       return compact(uniq(flatMap(this.pages, "frontmatter.categories"))).sort()
